@@ -1,3 +1,101 @@
+### Exercise 1 ###
+
+(a) better - a more flexible approach will fit the data closer and with the large sample size a better fit than an inflexible approach would be obtained
+
+(b) worse - a flexible method would over-fit the small number of observations
+
+(c) better - a more flexible approach will be able to better fit the non-linear relationship between the predictors and the response
+
+(d) worse - flexible method fit the noise as well which increase the variance
+
+### Exercise 2 ###
+
+(a) regression problem, we are more interested in inference
+
+n: 500 firms in the US
+p: profit, number of employees, industry
+
+(b) classification problem, we are more interested in prediction
+
+n: 20 similar products that were previously launched
+p: price charged, marketing budget, competition price, and ten other variables
+
+(c) regression problem, we are more interested in prediction
+
+n: 52 weeks of 2012 weekly data
+p: % change in the US market, % change in the British market, the % change in the German market
+
+### Exercise 3 ###
+
+(b) 
+
+Training MSE reduced as more flexible methods introduced since more flexible methods tend to better reduce training MSE
+
+Test MSE tend to reach minimum level before more flexible methods overfit the model
+
+Bayes (or irreducible) error should be a straight line slightly lower than minimum point of Test MSE representing the error that cannot be reduced by choosing a different fitting method
+
+Variance tend to increase as method become more and more flexible
+
+Bias tend to decrease as method become more and more flexible
+
+### Exercise 4 ###
+
+(a) 
+
+Decide whether to buy or sell a bond
+Decide whether to promote or not promote an employee
+Analyses whether a new album will hit the market well
+
+(b)
+
+Predict stock price level
+Allocate marketing budget based on past performance
+Attribute portfolio return to factors
+
+(c) 
+
+Classify emails into relevant categories
+Classify baseball players type
+Understand DNA functionality
+
+### Exercise 5 ###
+
+The advantages for a very flexible approach for regression or classification are obtaining a better fit for non-linear models, decreasing bias
+
+The disadvantages for a very flexible approach for regression or classification are requires estimating a greater number of parameters, follow the noise too closely, increasing variance
+
+A more flexible approach would be preferred to a less flexible approach when we are interested in prediction and not the interpret-ability of the results
+
+A less flexible approach would be preferred to a more flexible approach when we are interested in inference and the interpret-ability of the results
+
+### Exercise 6 ###
+
+A parametric approach reduces the problem of estimating f down to one of estimating a set of parameters because it assumes a form for f
+
+A non-parametric approach does not assume a functional form for f and so requires a very large number of observations to accurately estimate f
+
+The advantages of a parametric approach to regression or classification are the simplifying of modeling f to a few parameters and not as many observations are required compared to a non-parametric approach
+
+The disadvantages of a parametric approach to regression or classification are a potential to inaccurately estimate f if the form of f assumed is wrong or to overfit the observations if more flexible models are used
+
+### Exercise 7 ###
+
+(a) 
+
+3
+2
+sqrt(10) = 3.2
+sqrt(5) = 2.2
+sqrt(2) = 1.4
+sqrt(3) = 1.7
+
+(b) Green
+
+(c) Red
+
+(d) Small, a small K would be flexible for a non-linear decision boundary, whereas a large K would try to fit a more linear boundary because it takes more points into consideration
+
 ### Exercise 8 ###
 
 (a) Use the read.csv() function to read the data into R. Call the loaded data college.

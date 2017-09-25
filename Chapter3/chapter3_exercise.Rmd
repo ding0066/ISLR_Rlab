@@ -1,4 +1,12 @@
-### 3.7 Exercise
+### Question 1 ###
 
-## Question 1
+Based on Table 3.4, we can conclude that both TV and radio is has significant impact on sales performance. While newspaper does not prove to have a significant impact on sales.
+
+### Question 2 ###
+
+KNN regression averages the closest observations to estimate predict, KNN classifier assigns classification group based on majority of closest observations.
+
+### Question 3 ###
+
+
 
