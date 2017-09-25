@@ -1,0 +1,12 @@
+### 3.6.1 Libraries
+
+The library() function is used to load libraries, or groups of functions and data sets that are not included in the base R distribution.
+
+```{r}
+library(MASS)
+library(ISLR)
+```
+
+### 3.6.2 Simple Linear Regression
+
+
