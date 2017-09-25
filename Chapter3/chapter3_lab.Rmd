@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 ### 3.6.1 Libraries
 
 The library() function is used to load libraries, or groups of functions and data sets that are not included in the base R distribution.
@@ -128,4 +133,85 @@ lm.fit1=update(lm.fit,~.-age)
 
 ### 3.6.4 Interaction Terms
 
+It is easy to include interaction terms in a linear model using the lm() function. The syntax lstat:black tells R to include an interaction term between lstat and black. The syntax lstat*age simultaneously includes lstat, age, and the interaction term lstatxage as predictors.
+
+```{r}
+summary(lm(medv~lstat*age,data=Boston))
+```
+
+### 3.6.5 Non-linear Transformations of the Predictors
+
+The lm() function can also accomodate non-linear transformations of the predictors. For instance, given a predictor X, we can create a predictor X^2 using I(X^2)
+
+```{r}
+lm.fit2=lm(medv~lstat+I(lstat^2), data=Boston)
+summary(lm.fit2)
+```
+
+We use the anova() function to further quantify the extent to which the quadratic fit is superior to the linear fit.
+
+```{r}
+lm.fit=lm(medv~lstat,data=Boston)
+anova(lm.fit,lm.fit2)
+```
+
+This provides very clear evidence that the model containing the predictors lstat and lstat2 is far superior to the model that only contains the predictor lstat.
+
+```{r}
+par(mfrow=c(2,2))
+plot(lm.fit2)
+```
+
+In order to create a cubic fit, we can include a predictor of the form I(X^3). However, this approach can start to get cumbersome for higher order polynomials. A better approach involves using the poly() function to create the polynomial within lm().
+
+```{r}
+lm.fit5=lm(medv~poly(lstat,5),data=Boston)
+summary(lm.fit5)
+```
+
+Of course, we are in no way restricted to using polynomial transformations of the predictors. Here we try a log transformation.
+
+```{r}
+summary(lm(medv~log(rm),data=Boston))
+```
+
+### 3.6.6 Qualitative Predictors
+
+We will attempt to predict Sales in 400 locations based on a number of predictors.
+
+```{r}
+#fix(Carseats)
+names(Carseats)
+```
+
+The predictor Shelveloc takes on three possible values, Bad, Medium, and Good. Given a qualitative variable such as Shelveloc, R generates dummy variables automatically.
+
+```{r}
+lm.fit=lm(Sales~.+Income:Advertising+Price:Age,data=Carseats)
+summary(lm.fit)
+```
+
+The contrasts() function returns the coding that R uses for the dummy variables.
+
+```{r}
+contrasts(Carseats$ShelveLoc)
+```
+
+### 3.6.7 Wrting Functions
+
+Below we provide a simple function that reads in the ISLR and MASS libraries, called LoadLibraries().
+
+```{r}
+LoadLibraries=function(){
+  library(ISLR)
+  library(MASS)
+  print("The libraries have been loaded.")
+}
+```
+
+If we call the function, the libraries are loaded in and the print statement is output.
+
+```{r}
+LoadLibraries()
+```
 
