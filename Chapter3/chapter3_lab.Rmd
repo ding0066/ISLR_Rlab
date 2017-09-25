@@ -9,4 +9,123 @@ library(ISLR)
 
 ### 3.6.2 Simple Linear Regression
 
+The MASS library contains the Boston data set, which records medv for 506 neighborhoods around Boston. We will seek to predict medv using 13 predictors such as rm, age, and lstat.
+
+```{r}
+#fix(Boston)
+names(Boston)
+```
+
+We will start by using the lm() function to fit a simple linear regression model, with medv as the response and lstat as the predictor.
+
+```{r}
+lm.fit = lm(medv~lstat,data=Boston)
+```
+
+If we type lm.fit, some basic information about the model is output. For more detailed information, we use summary(lm.fit).
+
+```{r}
+lm.fit
+
+summary(lm.fit)
+```
+
+We can use the names() function in order to find out what other pieces of information are stored in lm.fit. Although we can extract these quantities by name, it is safer to use the extractor functions like coef() to access them.
+
+```{r}
+names(lm.fit)
+
+coef(lm.fit)
+```
+
+In order to obtain a confidence interval for the coefficient estimates, we can use the confint() command
+
+```{r}
+confint(lm.fit)
+```
+
+The predict() function can be used to produce confidence intervals and prediction intervals for the prediction of medv for a given value of lstat.
+
+```{r}
+predict(lm.fit, data.frame(lstat=c(5,10,15)), interval = "confidence")
+```
+
+```{r}
+predict(lm.fit, data.frame(lstat=c(5,10,15)), interval = "prediction")
+```
+
+We will now plot medv and lstat along with the least squares regression line using the plot() and abline() functions
+
+```{r}
+plot(Boston$lstat,Boston$medv)
+abline(lm.fit, lwd=3, col="red")
+```
+
+Below we experiment with some additional settings for plotting lines and points.
+
+```{r}
+plot(Boston$lstat,Boston$medv,col="red")
+plot(Boston$lstat,Boston$medv,pch=20)
+plot(Boston$lstat,Boston$medv,pch="+")
+plot(1:20,1:20,pch=1:20)
+```
+
+Next we examine some diagnostic plots. Four diagnostic plots are automatically produced by applying the plot() function directly to the output from lm(). In general, this command will produce one plot at a time, and hitting Enter will generate the next plot.
+
+```{r}
+par(mfrow=c(2,2))
+plot(lm.fit)
+```
+
+Alternatively, we can compute the residuals from a linear regression fit using the residuals() function. The function rstudent() will return the studentized residuals.
+
+```{r}
+plot(predict(lm.fit), residuals(lm.fit))
+plot(predict(lm.fit), rstudent(lm.fit))
+```
+
+On the basis of the residual plots, there is some evidence of non-linearity. Leverage statistics can be computed for any number of predictors using the hatvalues() function.
+
+```{r}
+plot(hatvalues(lm.fit))
+```
+
+### 3.6.3 Multiple Linear Regression
+
+In order to fit a multiple linear regression model using least squares, we again use the lm() function. The syntax lm(y~x1+x2+x3) is used to fit a model with three predictors.
+
+```{r}
+lm.fit=lm(medv~lstat+age,data=Boston)
+summary(lm.fit)
+```
+
+The Boston data set contains 13 variables, and so it would be cumbersome to have to type all of these in order to perform a regression using all of the predictors.
+
+```{r}
+lm.fit=lm(medv~.,data=Boston)
+summary(lm.fit)
+```
+
+The vif() function, part of the car package, can be used to compute variance inflation factors.
+
+```{r}
+library(car)
+vif(lm.fit)
+```
+
+what if we would like to perform a regression using all of the variables but one?
+
+```{r}
+lm.fit1=lm(medv~.-age,data=Boston)
+summary(lm.fit1)
+```
+
+Alternatively, the update() function can be used.
+
+```{r}
+lm.fit1=update(lm.fit,~.-age)
+```
+
+### 3.6.4 Interaction Terms
+
 
