@@ -8,5 +8,40 @@ KNN regression averages the closest observations to estimate predict, KNN classi
 
 ### Question 3 ###
 
+(a)
 
+i. inccorect, since there is an interaction term between gender and GPA, it is hard to determine whether X3 will be positively contributing to salary or negatively
 
+ii. inccorect, same reason as above, if GPA is larger than 3.5, then male earns more than female, vice versa
+
+iii. correct, if GPA is higher than .53, then male earns more than female
+
+iv. inccorect, the GPA would need to be below 3.5 for female to earn more than male
+
+(b)
+
+50+20*4+0.07*110+35*1+0.01*4*110-10*4*1=137.1
+
+(c)
+
+False, small coefficient could be attributed to large variable values, unless statistical test is conducted and p-value is calculated, it is hard to prove whether a term is significantly/not significantly contributing to salary.
+
+### Question 4 ###
+
+(a)
+
+Training RSS would be lower for cubic regression compared to the linear regression, although the true relation is linear, cubic regression provides more rooms for fitting the trainning set data, since the sole purpose of fitting is to reduce training RSS, with more terms added to the equation, smaller RSS would be expected.
+
+(b)
+
+Since the true relationship is linear, the test RSS would tend to reveal that cubic regression creates an overfit in the model with generally larger RSS than linear regression.
+
+(c)
+
+As we illustrated in question (a), with more terms added to the fitting model for cubic regression, the training RSS would be at least the same or lower compared to linear regression
+
+(d)
+
+Since cubic regression would 
+
+### Question 5 ###
