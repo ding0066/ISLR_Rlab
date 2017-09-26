@@ -42,6 +42,28 @@ As we illustrated in question (a), with more terms added to the fitting model fo
 
 (d)
 
-Since cubic regression would 
+Since cubic regression would help better fit the nonlinearity of the data set, it is likely that test RSS is better for cubic regression compared to linear regression
 
 ### Question 5 ###
+
+$$ \hat{y}{i} = x{i} \times \frac{\sum_{i'=1}^{n}\left ( x_{i'} y_{i'} \right )}{\sum_{j=1}^{n} x_{j}^{2}} $$
+
+$$ \hat{y}{i} = \sum_{i'=1}^{n} \frac{\left ( x_{i'} y_{i'} \right ) \times x_{i}}{\sum_{j=1}^{n} x_{j}^{2}} $$
+
+$$ \hat{y}{i} = \sum_{i'=1}^{n} \left ( \frac{ x_{i} x_{i'} } { \sum_{j=1}^{n} x_{j}^{2} } \times y_{i'} \right ) $$
+
+$$ a_{i'} = \frac{ x_{i} x_{i'} } { \sum_{j=1}^{n} x_{j}^{2} } $$
+
+### Question 6 ###
+
+According to the equation 3.4,
+
+$$ \hat{\beta}_{1} = \frac{\sum_{i=1}^{n} (x_i-\bar{x})(y_i-\bar{y})} {\sum_{i=1}^{n} (x_i-\bar{x})^2} $$
+
+$$ \hat{\beta}_{0} = \bar{y} - \hat{\beta}_{1}\bar{x} $$
+
+beta 1 would equal to 0 when xi equal to x average. beta 0 would equal to y average. Hence the model would prove to be valid regardless.
+
+### Question 7 ###
+
+
