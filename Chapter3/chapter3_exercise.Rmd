@@ -66,4 +66,52 @@ beta 1 would equal to 0 when xi equal to x average. beta 0 would equal to y aver
 
 ### Question 7 ###
 
+An later exercise ...
+
+### Question 8 ###
+
+(a)
+
+```{r}
+require(ISLR)
+data(Auto)
+lm.fit <- lm(mpg~horsepower, data=Auto)
+summary(lm.fit)
+```
+
+i. Yes, according to p-value, there is a significant relationship between the predictor and the response.
+ii. The relationship is really strong, since p-value is close to 0
+iii. The coefficient estimate suggest a positive relationship
+
+iv.
+
+```{r}
+predict(lm.fit, data.frame(horsepower=c(98)))
+predict(lm.fit, data.frame(horsepower=c(98)), interval = "confidence")
+predict(lm.fit, data.frame(horsepower=c(98)), interval = "prediction")
+```
+
+(b)
+
+```{r}
+plot(Auto$horsepower,Auto$mpg)
+abline(lm.fit, lwd=3)
+```
+
+(c)
+
+```{r}
+par(mfrow=c(2,2))
+plot(lm.fit)
+```
+
+According to Residuals vs. Fitted plot, the residuals seem to be non-linear
+
+### Question 9 ###
+
+(a)
+
+```{r}
+
+```
 
