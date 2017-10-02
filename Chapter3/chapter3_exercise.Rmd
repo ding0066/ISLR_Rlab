@@ -112,6 +112,15 @@ According to Residuals vs. Fitted plot, the residuals seem to be non-linear
 (a)
 
 ```{r}
+require(ISLR)
+data(Auto)
+pairs(Auto)
+```
+
+(b)
+
+```{r}
 
 ```
+
 
