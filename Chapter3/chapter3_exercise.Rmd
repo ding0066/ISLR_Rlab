@@ -120,7 +120,55 @@ pairs(Auto)
 (b)
 
 ```{r}
-
+cor(subset(Auto, select=-c(name)))
 ```
 
+(c)
+
+```{r}
+lm.fit <- lm(mpg~.-name,data=Auto)
+summary(lm.fit)
+```
+
+i. Yes, overall p-value is close to 0 indicating there is a strong relationship between the predictors and the response
+
+ii. displacement, weight, year and origin were displaying a statistically significant relationship to the response.
+
+iii. it suggest for every year of increment of the car which are produced, the mpg would increase for about 0.75.
+
+(d)
+
+```{r}
+par(mfrow=c(2,2))
+plot(lm.fit)
+```
+
+The residual plot suggested some outliers on top right corner of the chart, the leverage plot shows observation 14 has an outstanding leverage compared to rest of the data sets.
+
+(e)
+
+```{r}
+lm.fit <- lm(mpg~.-name-displacement-acceleration-cylinders+weight*year+horsepower*origin,data=Auto)
+summary(lm.fit)
+```
+
+Tried the new model with a more spread and linear distribution of residuals
+
+(f)
+
+```{r}
+lm.fit <- lm(mpg~.-name-displacement-acceleration-cylinders+weight*year+log(horsepower)+I(year^2),data=Auto)
+summary(lm.fit)
+```
+
+log horsepower and year^2 does provide more explanatory power to the data set, resulting in higher adjusted R-Squared as well.
+
+### Question 10 ###
+
+(a)
+
+```{r}
+data(Carseats)
+lm.fit=lm()
+```
 
