@@ -169,6 +169,47 @@ log horsepower and year^2 does provide more explanatory power to the data set, r
 
 ```{r}
 data(Carseats)
-lm.fit=lm()
+lm.fit=lm(Sales~Price+Urban+US,data=Carseats)
+summary(lm.fit)
 ```
+
+(b)
+
+Price is negatively correlated with Sales, if the store is in urban areas, that would result in less sales, if the store is in US, it will result in more sales.
+
+(c)
+
+$$ Sales_{i} = 13.043 - 0.054Price_{i} - 0.0219Urban_{i} + 1.201US_{i} $$
+
+(d)
+
+For Urban predictors, I can reject it  since p-value does not suggest a significant relationship
+
+(e)
+
+```{r}
+lm.fit=lm(Sales~Price+US,data=Carseats)
+summary(lm.fit)
+```
+
+(f)
+
+The adjusted R-Square is slightly higher in later case, but both of them are pretty low
+
+(g)
+
+```{r}
+confint(lm.fit)
+```
+
+(h)
+
+```{r}
+par(mfrow=c(2,2))
+plot(lm.fit)
+```
+
+There is evidence of high leverage for one observation, no evidence of clear outliers
+
+### Question 11 ###
 
