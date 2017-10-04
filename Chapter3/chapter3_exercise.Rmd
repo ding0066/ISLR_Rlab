@@ -169,7 +169,7 @@ log horsepower and year^2 does provide more explanatory power to the data set, r
 
 ```{r}
 data(Carseats)
-lm.fit=lm(Sales~Price+Urban+US,data=Carseats)
+lm.fit <- lm(Sales~Price+Urban+US,data=Carseats)
 summary(lm.fit)
 ```
 
@@ -188,7 +188,7 @@ For Urban predictors, I can reject it  since p-value does not suggest a signific
 (e)
 
 ```{r}
-lm.fit=lm(Sales~Price+US,data=Carseats)
+lm.fit <- lm(Sales~Price+US,data=Carseats)
 summary(lm.fit)
 ```
 
@@ -213,3 +213,323 @@ There is evidence of high leverage for one observation, no evidence of clear out
 
 ### Question 11 ###
 
+```{r}
+set.seed(1)
+x <- rnorm(100)
+y <- 2*x+rnorm(100)
+```
+
+(a)
+
+```{r}
+lm.fit <- lm(y~x+0)
+summary(lm.fit)
+```
+
+The coefficient estimate $$ \hat{\beta} $$ is 1.9939. The standard error of the estimate is 0.1065. Given significant large t value coupled with close to 0 p-value we can reject null hypothesis and conclude that there is a significant relationship between y and x.
+
+(b)
+
+```{r}
+lm.fit <- lm(x~y+0)
+summary(lm.fit)
+```
+
+The coefficient estimate $$ \hat{\beta} $$ is 0.39111. The standard error of the estimate is 0.02089. Given significant large t value coupled with close to 0 p-value we can reject null hypothesis and conclude that there is a significant relationship between x and y.
+
+(c)
+
+inversely correlated
+
+(d)
+
+...
+
+(e)
+
+As the formula suggested, by exchanging x and y in the formulat does not really change the outcome of the result since it's all product terms, hence the t-statistic for both regression should be the same.
+
+(f)
+
+```{r}
+lm1.fit <- lm(y~x)
+lm2.fit <- lm(x~y)
+summary(lm1.fit)
+summary(lm2.fit)
+```
+
+t-statistics for both are very close
+
+### Question 12 ###
+
+(a)
+
+When xi equal to yi, then the estimator will be the same, and sd is small enough and not affecting prediction of estimator
+
+(b)
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+y <- 2*x+rnorm(100)
+```
+
+In this case coefficient would be different between X onto Y and Y onto X.
+
+```{r}
+lm1.fit <- lm(y~x+0)
+lm2.fit <- lm(x~y+0)
+summary(lm1.fit)
+summary(lm2.fit)
+```
+
+(c)
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+y <- x + rnorm(100, mean = 0, sd = 0.001)
+```
+
+In this case, they will be the same
+
+```{r}
+lm1.fit <- lm(y~x+0)
+lm2.fit <- lm(x~y+0)
+summary(lm1.fit)
+summary(lm2.fit)
+```
+
+### Question 13 ###
+
+(a)
+
+```{r}
+set.seed(1)
+x <- rnorm(100, mean = 0, sd = 1)
+```
+
+
+(b)
+
+```{r}
+eps <- rnorm(100, mean = 0, sd = 0.25)
+```
+
+(c)
+
+```{r}
+y <- -1 + 0.5*x + eps
+length(y)
+```
+
+vector length is 100.
+
+intercept term is around -1 and coefficient for x is around 0.5.
+
+(d)
+
+```{r}
+plot(x,y)
+```
+
+I can observe a relatively strong linear relationship
+
+(e)
+
+```{r}
+lm.fit <- lm(y~x)
+summary(lm.fit)
+```
+
+modelled intercept term is -1.00942, modelled coefficient term is 0.49973.
+
+(f)
+
+```{r}
+plot(x,y)
+abline(-1,0.5, col = "blue")
+abline(lm.fit, col = "red")
+legend(x = c(0.2,7),
+       y = c(-1.8,-2.3),
+       legend = c("population", "model fit"),
+       col = c("blue","red"), lwd = 2)
+```
+
+(g)
+
+```{r}
+lm.fit.poly <- lm(y~x+I(x^2))
+summary(lm.fit.poly)
+```
+
+No, the quadratic term does not prove to be significantly correlated with result term, hence it does not increase the model fit.
+
+(h)
+
+```{r}
+eps <- rnorm(100, mean = 0, sd = 0.5)
+y <- -1 + 0.5*x + eps
+lm.fit.more.noisy <- lm(y~x)
+summary(lm.fit.more.noisy)
+```
+
+(i)
+
+```{r}
+eps <- rnorm(100, mean = 0, sd = 0.1)
+y <- -1 + 0.5*x + eps
+lm.fit.less.noisy <- lm(y~x)
+summary(lm.fit.less.noisy)
+```
+
+(j)
+
+```{r}
+confint(lm.fit)
+confint(lm.fit.more.noisy)
+confint(lm.fit.less.noisy)
+```
+
+The confidence interval is larger when the data set is noisier and vice versa
+
+### Question 14 ###
+
+(a)
+
+```{r}
+set.seed(1)
+x1 <- runif(100)
+x2 <- 0.5*x1 + rnorm(100)/10
+y <- 2 + 2*x1 + 0.3*x2 + rnorm(100)
+```
+
+population regression is $$ y = {\beta}_{0} + {\beta}_{1}x_{1} + {\beta}_{2}x_{2} + {\epsilon} $$
+
+The coefficient are $$ {\beta}_{0} = 2 $$, $$ {\beta}_{1} = 2 $$ and $$ {\beta}_{2} = 0.3 $$
+
+(b)
+
+```{r}
+plot(x1, x2)
+```
+
+There is a relatively strong linear relationship between the two variables.
+
+(c)
+
+```{r}
+lm.fit <- lm(y~x1+x2)
+summary(lm.fit)
+```
+
+Intercept is mostly close to population intercept, but both x1 and x2 are slightly far away from true x1 and x2.
+
+Under 95% confidence interval we will reject hypothesis, but we won't reject hypothesis on beta2
+
+(d)
+
+```{r}
+lm.fit <- lm(y~x1)
+summary(lm.fit)
+```
+
+Yes, we can reject the null hypothesis, since the relationship is significant
+
+(e)
+
+```{r}
+lm.fit <- lm(y~x2)
+summary(lm.fit)
+```
+
+Yes, we can reject the null hypothesis, since the relationship is signficant
+
+(f)
+
+No, they don't. As far as we can tell based on the real relationship, x1 can mostly explained the movements in x2. Hence when both x1 and x2 are presented as coefficient, due to collinearility, only one variable is actually needed for the model resulting us rejecting x2.
+
+In other scenarios, only one variable is used, hence we cannot reject any of them.
+
+(g)
+
+```{r}
+x1 <- c(x1, 0.1)
+x2 <- c(x2, 0.8)
+y <- c(y, 6)
+```
+
+```{r}
+lm.fit <- lm(y~x1+x2)
+par(mfrow=c(2,2))
+plot(lm.fit)
+```
+
+Clearly the newly added item 101 has a high leverage in the data set compared with other data
+
+### Question 15 ###
+
+(a)
+
+```{r}
+library(MASS)
+names(Boston)[-1]
+```
+
+```{r}
+lmp <- function (modelobject) {
+    if (class(modelobject) != "lm") 
+      stop("Not an object of class 'lm' ")
+    f <- summary(modelobject)$fstatistic
+    p <- pf(f[1],f[2],f[3],lower.tail=F)
+    attributes(p) <- NULL
+    return(p)
+}
+
+results <- combn(names(Boston), 2, 
+                 function(x) { lmp(lm(Boston[, x])) }, 
+                 simplify = FALSE)
+
+vars <- combn(names(Boston), 2)
+names(results) <- paste(vars[1,],vars[2,],sep="~")
+results[1:13]
+```
+
+The rad variable has a very significant correlation with per capita crime rate by town. At the same time, it produced higher R square as well.
+
+(b)
+
+```{r}
+lm.fit.multi <- lm(crim~., data=Boston)
+summary(lm.fit.multi)
+```
+
+The above model is developed using backwardation method, and end up with only zn, dis, rad and medv as the variables. Under this scenario, we can reject null hypothesis.
+
+(c)
+
+```{r}
+results <- combn(names(Boston), 2, 
+                 function(x) { coefficients(lm(Boston[, x])) }, 
+                 simplify = FALSE)
+(coef.uni <- unlist(results)[seq(2,26,2)])
+```
+
+```{r}
+(coef.multi <- coefficients(lm.fit.multi)[-1])
+```
+
+```{r}
+plot(coef.uni, coef.multi)
+```
+
+beta coefficient tend to be very different between multivariate regression and single variable regression.
+
+(d)
+
+```{r}
+lm.fit.poly <- lm(crim~poly(zn,3), data = Boston)
+summary(lm.fit.poly)
+```
+
+The significance goes all the way up to square term then there is no evidence to prove further polynomial term to be significant for zn term
